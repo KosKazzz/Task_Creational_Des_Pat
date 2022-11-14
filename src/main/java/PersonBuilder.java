@@ -17,6 +17,9 @@ public class PersonBuilder {
     }
 
     public PersonBuilder setAge(int age) {
+        if (age < 0 || age > 150) {
+            throw new IllegalArgumentException("The age is incorrectly specified");
+        }
         this.age = OptionalInt.of(age);
         return this;
     }
@@ -29,15 +32,12 @@ public class PersonBuilder {
     public Person build() {
         Person prs = null;
         if (this.name == null) {
-            throw new IllegalArgumentException("You must specify the name!");
+            throw new IllegalStateException("You must specify the name!");
         }
         if (this.surname == null) {
-            throw new IllegalArgumentException("You must specify the surname!");
+            throw new IllegalStateException("You must specify the surname!");
         }
-        if (this.age.getAsInt() < 0 || this.age.getAsInt() > 150) {
-            throw new IllegalArgumentException("The age is incorrectly specified");
-        }
-        if(this.address == null){
+        if (this.address == null) {
             this.address = "unknown";
         }
         prs = new Person(this.name, this.surname, this.age.getAsInt(), this.address);

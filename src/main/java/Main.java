@@ -26,7 +26,6 @@ public class Main {
         } catch (IllegalStateException e) {
             e.printStackTrace();
         }
-
         try {
             // Возраст недопустимый
             new PersonBuilder().setName("TestIllegalAge").setSurname("TestIllegalAge").setAge(-100).build();
